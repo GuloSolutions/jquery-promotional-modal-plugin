@@ -1,0 +1,22 @@
+{
+  "name": "jquery-promotional-modal-plugin",
+  "version": "1.0.0",
+  "description": "Basic promotional modal",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuloSolutions/jquery-promotional-modal-plugin.git"
+  },
+  "keywords": [
+    "jquery"
+  ],
+  "author": "Gulo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GuloSolutions/jquery-promotional-modal-plugin/issues"
+  },
+  "homepage": "https://github.com/GuloSolutions/jquery-promotional-modal-plugin#readme"
+}
