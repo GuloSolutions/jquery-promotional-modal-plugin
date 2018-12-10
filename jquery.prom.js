@@ -19,7 +19,7 @@
 
     $.extend(Plugin.prototype, {
         init: function() {
-            if (!this.detectCurrentUrl() || !this.detectRecommendation()) {
+            if ( !this.detectCurrentUrl() || !this.detectRecommendation()) {
                 this.checkCookies();
                 this.timeOut();
                 this._scroll_detect();
@@ -33,7 +33,7 @@
                 // set cookie expiration time in 3 days
                 Cookies.set('promocookie', cval, {
                     expires: 3,
-                    path: ''
+                    path: '/'
                 });
             } else {
                 this.settings.isCookieSet = true;
@@ -60,12 +60,21 @@
         timeOut: function() {
             var id = this.element.id;
             var cookie = this.settings.isCookieSet;
-            if (cookie === false) {
+            var modalOpen = document.getElementsByClassName('close-modal')[0].rel;
+
+            if (cookie === false || !modalOpen.length ) {
                 window.setTimeout(function() {
                     $('#' + id).modal({
                         fadeDuration: 250
                     });
-                }, 3000);
+                }, 2000);
+            } else {
+                window.setTimeout(function() {
+                    $('#' + id).modal({
+                        fadeDuration: 250
+                    });
+                }, 4000);
+
             }
             this.settings.isCookieSet = true;
         },
@@ -76,6 +85,7 @@
             }
             return false;
         },
+
         detectRecommendation: function() {
             var doNotRunOn = this.settings.doNotRunOn;
             var recAttr = $('.recommended').data('recommended-product');
