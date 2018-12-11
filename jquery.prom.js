@@ -60,21 +60,12 @@
         timeOut: function() {
             var id = this.element.id;
             var cookie = this.settings.isCookieSet;
-            var modalOpen = document.getElementsByClassName('close-modal')[0].rel;
-
-            if (cookie === false || !modalOpen.length ) {
-                window.setTimeout(function() {
-                    $('#' + id).modal({
-                        fadeDuration: 250
-                    });
-                }, 2000);
-            } else {
+            if (cookie === false ) {
                 window.setTimeout(function() {
                     $('#' + id).modal({
                         fadeDuration: 250
                     });
                 }, 4000);
-
             }
             this.settings.isCookieSet = true;
         },
