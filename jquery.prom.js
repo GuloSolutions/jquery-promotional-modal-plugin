@@ -1,8 +1,6 @@
 ;
 (function($, window, document, undefined) {
-
     "use strict";
-
     var pluginName = "prom",
         defaults = {
             doNotRunOn: '',
