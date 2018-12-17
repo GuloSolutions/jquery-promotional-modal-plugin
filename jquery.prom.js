@@ -1,6 +1,8 @@
 ;
 (function($, window, document, undefined) {
+
     "use strict";
+
     var pluginName = "prom",
         defaults = {
             doNotRunOn: '',
@@ -15,26 +17,13 @@
         this.init();
     }
 
+    Cookies.remove('modalpageopened');
+
     $.extend(Plugin.prototype, {
         init: function() {
             if ( !this.detectCurrentUrl() || !this.detectRecommendation()) {
-                this.checkCookies();
                 this.timeOut();
-                this._scroll_detect();
-            }
-        },
-
-        checkCookies: function() {
-            // check cookies
-            if (Cookies.get('promocookie') === undefined) {
-                var cval = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                // set cookie expiration time in 3 days
-                Cookies.set('promocookie', cval, {
-                    expires: 3,
-                    path: '/'
-                });
-            } else {
-                this.settings.isCookieSet = true;
+                //this._scroll_detect();
             }
         },
 
@@ -42,14 +31,16 @@
             var id = this.element.id;
             var cookie = this.settings.isCookieSet;
             $(window).on("scroll", function() {
+                var activated = $('#coupon-cards');
+                var promoCookie = Cookies.get('promocookie');
+                var beforeCookie = Cookies.get('modalpageopened');
                 var scrollHeight = $(document).height();
                 var scrollPosition = $(window).height() + $(window).scrollTop();
                 if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-                    if (cookie === false) {
+                    if (promoCookie === undefined && beforeCookie === undefined && (activated.length = 0 || activated.css('display') ==  'none')) {
                         $('#' + id).modal({
                             fadeDuration: 250
                         });
-                        this.settings.isCookieSet = true;
                     }
                 }
             });
@@ -57,16 +48,40 @@
 
         timeOut: function() {
             var id = this.element.id;
-            var cookie = this.settings.isCookieSet;
-            if (cookie === false ) {
-                window.setTimeout(function() {
+            var cookie = Cookies.get('promocookie');
+            var current = $('.close-modal');
+            var beforeCookie = Cookies.get('modalpageopened');
+            var beforeModal = parseInt(sessionStorage.getItem("popped"));
+            var activated = $('#coupon-cards');
+
+            window.setTimeout(function() {
+                var beforeCookie = Cookies.get('modalpageopened');
+                var promoCookie = Cookies.get('promocookie');
+                    if ( beforeCookie === undefined) {
+                        if (promoCookie === undefined  && (activated.length == 0 || activated.css('display') ==  'none')) {
                     $('#' + id).modal({
                         fadeDuration: 250
                     });
-                }, 4000);
+
+                    if ( cookie == undefined ){
+                        checkCookies();
+                    }
+                }
             }
-            this.settings.isCookieSet = true;
+            }, 4000);
+
+            var checkCookies = function() {
+                if (Cookies.get('promocookie') === undefined) {
+                    var cval = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    // set cookie expiration time in 3 days
+                    Cookies.set('promocookie', cval, {
+                        expires: 3,
+                        path: '/'
+                    });
+                }
+            };
         },
+
         detectCurrentUrl: function() {
             var doNotRunOn = this.settings.doNotRunOn;
             if (doNotRunOn.length && window.location.href.indexOf(doNotRunOn) > -1) {
