@@ -6,7 +6,9 @@
     var pluginName = "prom",
         defaults = {
             doNotRunOn: '',
-            isCookieSet: false
+            isCookieSet: false,
+            fadeDuration: 250,
+            fadeDelay: 0
         };
 
     function Plugin(element, options) {
@@ -16,18 +18,19 @@
         this._name = pluginName;
         this.init();
     }
-
+    // remove cookies for single page
+    // therse are necessary for not triggering another modal
     Cookies.remove('modalpageopened');
 
     $.extend(Plugin.prototype, {
         init: function() {
             if ( !this.detectCurrentUrl() || !this.detectRecommendation()) {
                 this.timeOut();
-                //this._scroll_detect();
+                this._scroll_detect();
             }
         },
 
-        _scroll_detect: function() {
+        _scroll_detect: function(fadeDuration, fadeDelay) {
             var id = this.element.id;
             var cookie = this.settings.isCookieSet;
             $(window).on("scroll", function() {
@@ -39,14 +42,15 @@
                 if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
                     if (promoCookie === undefined && beforeCookie === undefined && (activated.length = 0 || activated.css('display') ==  'none')) {
                         $('#' + id).modal({
-                            fadeDuration: 250
+                            fadeDuration: fadeDuration,
+                            fadeDelay:fadeDelay
                         });
                     }
                 }
             });
         },
 
-        timeOut: function() {
+        timeOut: function(fadeDuration, fadeDelay) {
             var id = this.element.id;
             var cookie = Cookies.get('promocookie');
             var current = $('.close-modal');
@@ -60,7 +64,8 @@
                     if ( beforeCookie === undefined) {
                         if (promoCookie === undefined  && (activated.length == 0 || activated.css('display') ==  'none')) {
                     $('#' + id).modal({
-                        fadeDuration: 250
+                        fadeDuration: fadeDuration,
+                        fadeDelay: fadeDelay
                     });
 
                     if ( cookie == undefined ){
