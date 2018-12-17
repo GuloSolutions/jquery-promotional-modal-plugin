@@ -25,8 +25,8 @@
     $.extend(Plugin.prototype, {
         init: function() {
             if ( !this.detectCurrentUrl() || !this.detectRecommendation()) {
-                this.timeOut();
-                this._scroll_detect();
+                this.timeOut(this.settings.fadeDelay, this.settings.fadeDuration);
+                this._scroll_detect(this.settings.fadeDuration, this.settings.fadeDelay);
             }
         },
 
