@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Basic promotional modal",
   "main": "jquery.prom.js",
-  "scripts": {
-    "test": "test"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GuloSolutions/jquery-promotional-modal-plugin.git"
@@ -24,12 +22,12 @@
   },
   "homepage": "https://github.com/GuloSolutions/jquery-promotional-modal-plugin#readme",
   "dependencies": {
-    "jquery": "2.2.4"
+    "jquery": "^3.3.1",
+    "jquery-modal": "^0.9.1",
+    "js-cookie": "^2.2.0"
   },
   "devDependencies": {
-
-  },
-  "scripts": {
-
+    "grunt": "^1.0.3",
+    "karma": "^4.0.0"
   }
 }
