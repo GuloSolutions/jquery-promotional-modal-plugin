@@ -13,13 +13,13 @@ Basic jQuery plugin triggers modals and measures user experience
 	- ex. ```$(#selector).prom({ doNotRunOn: 'gummies' });```
 
 - List of config params and their defaults:
-    - doNotRunOn: 250,
+    - doNotRunOn: '',
+    - fadeDuration: 250,
     - fadeDelay: 0,
 
 - `doNotRunOn` is empty by default
 - `fadeDuration` sets param for jquery modal
 - `fadeDelay` sets param for jquery modal
-
 
 - `detectRecommendation` method is optional and tied to concrete css params; comment out or replace conditions
 -  `beforeCookie` detects if another modal is currently open; if yes, it prevents the promo modal from being activated
