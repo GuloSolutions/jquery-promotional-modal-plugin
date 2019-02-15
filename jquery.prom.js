@@ -18,7 +18,7 @@
         this.init();
     }
     // remove cookies for single page
-    // therse are necessary for not triggering another modal
+    // these are necessary for not triggering another modal
     Cookies.remove('modalpageopened');
 
     $.extend(Plugin.prototype, {
