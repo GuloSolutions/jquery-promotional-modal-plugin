@@ -102,7 +102,6 @@
             }
             return false;
         },
-
     });
 
     $.fn[pluginName] = function(options) {
