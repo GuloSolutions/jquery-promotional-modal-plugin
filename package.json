@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/GuloSolutions/jquery-promotional-modal-plugin#readme",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "jquery-modal": "^0.9.1",
     "js-cookie": "^2.2.0"
   },
